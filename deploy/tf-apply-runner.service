@@ -1,0 +1,21 @@
+#tf-apply runner — systemd --user unit (host-native alternative to the container runtime). REQUIRES an out-of-tree drop-in ~/.config/systemd/user/tf-apply-runner.service.d/paths.conf setting ReadWritePaths= (template: deploy/paths.conf.example), because ProtectSystem=strict otherwise leaves nothing writable. Setup: see README.
+[Unit]
+Description=tf-apply — loopback Terraform apply runner (host-native runtime)
+Documentation=https://github.com/Shaddar91/tf-apply-runner
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/tf-apply
+EnvironmentFile=%h/.config/tf-apply/runner.env
+Restart=on-failure
+RestartSec=2
+LimitCORE=0
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target

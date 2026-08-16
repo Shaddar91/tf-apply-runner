@@ -1,0 +1,22 @@
+#tf-apply runner — loopback Terraform apply service. Config/secrets load from the out-of-tree ${TF_RUNNER_ENV_FILE} (env_file); UID/GID and mount host paths come from the compose env-file (run via scripts/compose.sh). No secret or host path is inlined here.
+services:
+  tf-apply:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tf-apply-runner:latest
+    container_name: tf-apply-runner
+    env_file:
+      - ${TF_RUNNER_ENV_FILE}
+    user: "${TF_RUNNER_UID}:${TF_RUNNER_GID}"
+    #host networking, not a published port: the app binds 127.0.0.1 inside its namespace, which a bridge DNAT never reaches — host mode keeps it loopback-only on the host.
+    network_mode: host
+    volumes:
+      - ${TF_WORKSPACE_ROOT}:${TF_WORKSPACE_ROOT}:rw
+      - ${TF_UNROUTED_DIR}:${TF_UNROUTED_DIR}:rw
+      - ${TF_AWS_DIR}:${TF_AWS_DIR}:ro
+    ulimits:
+      core:
+        soft: 0
+        hard: 0
+    restart: unless-stopped

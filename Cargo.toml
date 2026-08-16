@@ -1,0 +1,26 @@
+[workspace]
+members = ["tf-apply", "tf-apply-mcp"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.75"
+
+[workspace.dependencies]
+tokio = { version = "1", features = ["full"] }
+axum = "0.7"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+thiserror = "1"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+subtle = "2"
+uuid = { version = "1", features = ["v4"] }
+reqwest = { version = "0.12", default-features = false, features = ["json"] }
+regex = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
+#MCP stdio door (tf-apply-mcp, plan Component 6) — same pin/features as harbinger-mcp.
+rmcp = { version = "1.7", features = ["server", "macros", "transport-io"] }
+#Wire-level stand-in for the tf-apply runner in the door's handler tests (dev-only).
+mockito = "1"

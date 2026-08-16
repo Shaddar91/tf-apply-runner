@@ -1,0 +1,22 @@
+[package]
+name = "tf-apply-mcp"
+version = "0.1.0"
+edition.workspace = true
+
+[[bin]]
+name = "tf-apply-mcp"
+path = "src/main.rs"
+
+[dependencies]
+tokio.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+reqwest.workspace = true
+rmcp.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[dev-dependencies]
+#Wire-level stand-in for the tf-apply runner in the handler tests — no live service needed.
+mockito.workspace = true

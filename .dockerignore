@@ -1,0 +1,15 @@
+#Keep the build context lean and secret-free; none of these are COPY'd by the Dockerfile.
+target
+runs
+.git
+.gitignore
+deploy
+docs
+.env
+.env.*
+*.env
+!*.env.example
+*.log
+*.jsonl
+*.reason
+.DS_Store

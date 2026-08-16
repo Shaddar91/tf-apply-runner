@@ -1,0 +1,2 @@
+[Service]
+ReadWritePaths=/abs/path/to/tf-apply-runner/runs /abs/path/to/pipeline/ready/_unrouted /abs/path/to/terraform/root /abs/path/to/second/root

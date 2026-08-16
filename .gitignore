@@ -1,0 +1,10 @@
+#Site config and run state live OUT of the repo tree (~/.config/tf-apply, ~/.local/state/tf-apply) by design, so the repo is publishable as-is; nothing below is a host path or secret.
+/target
+*.jsonl
+*.reason
+*.log
+logs/
+*credentials*
+*.pem
+*.key
+.DS_Store
